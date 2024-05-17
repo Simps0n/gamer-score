@@ -1,0 +1,20 @@
+%h1 Admin#index
+
+= link_to 'New Video Game', new_video_game_path
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Genre
+      %th Actions
+  %tbody
+    - @video_games.each do |video_game|
+      %tr
+        %td= link_to video_game.title, video_game_path(video_game)
+        %td= video_game.genre
+        %td
+          = link_to 'Edit', edit_video_game_path(video_game)
+          = link_to 'Destroy', video_game_path(video_game),
+                    data: { turbo_method: :delete,
+                            turbo_confirm: 'Are you sure?' }
