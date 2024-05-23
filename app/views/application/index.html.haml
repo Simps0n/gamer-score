@@ -1,0 +1,22 @@
+.container.center
+  %h2 What is your VARIETY gamer score ?
+  .center
+    %p Which of these Video Games series did you play (at least 1 game of)? 1 point per box checked!
+  .left 
+    %p#score 0/100
+
+.container
+  - @video_games.each_slice(25) do |games|
+    .row
+      - games.each do |game|
+        .col
+          %label
+            %input{ type: 'checkbox', name: 'video_games[]', value: game.id }
+              %strong
+                = game.title
+:javascript
+  document.addEventListener('change', function(event) {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    var count = checkboxes.length;
+    document.getElementById('score').innerText = count + '/100';
+  });
